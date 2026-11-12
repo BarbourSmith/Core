@@ -771,6 +771,226 @@
           "ioValue": "__GEOMETRY_INPUT__"
         }
       ]
+    },
+    {
+      "atomType": "Molecule",
+      "x": 0.3353,
+      "y": 0.32,
+      "uniqueID": "id-273",
+      "name": "CW Nut (Right Hand)",
+      "ioValues": [
+        {
+          "name": "Length",
+          "ioValue": 60
+        },
+        {
+          "name": "Outer Diameter",
+          "ioValue": 10,
+          "currentEquation": "10"
+        }
+      ],
+      "topLevel": false,
+      "allAtoms": [
+        {
+          "atomType": "Output",
+          "x": 0.98,
+          "y": 0.5,
+          "uniqueID": "id-275",
+          "ioValues": [
+            {
+              "name": "number or geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        },
+        {
+          "atomType": "Input",
+          "x": 0.0254,
+          "y": 0.1538,
+          "uniqueID": "id-277",
+          "name": "Length",
+          "type": "number",
+          "options": []
+        },
+        {
+          "atomType": "Input",
+          "x": 0.0254,
+          "y": 0.2462,
+          "uniqueID": "id-280",
+          "name": "Outer Diameter",
+          "type": "number",
+          "options": []
+        },
+        {
+          "atomType": "Circle",
+          "x": 0.18,
+          "y": 0.44,
+          "uniqueID": "id-283",
+          "ioValues": [
+            {
+              "name": "diameter",
+              "ioValue": 10
+            }
+          ]
+        },
+        {
+          "atomType": "Extrude",
+          "x": 0.26,
+          "y": 0.56,
+          "uniqueID": "id-286",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "height",
+              "ioValue": 60
+            }
+          ]
+        },
+        {
+          "atomType": "Equation",
+          "x": 0.34,
+          "y": 0.68,
+          "uniqueID": "id-290",
+          "name": "x + 4",
+          "ioValues": [
+            {
+              "name": "x",
+              "ioValue": 60
+            }
+          ],
+          "currentEquation": "x + 4"
+        },
+        {
+          "atomType": "Code",
+          "x": 0.42,
+          "y": 0.8,
+          "uniqueID": "id-294",
+          "ioValues": [
+            {
+              "name": "length",
+              "ioValue": 64
+            },
+            {
+              "name": "majorDiameter",
+              "ioValue": 8
+            },
+            {
+              "name": "clearance",
+              "ioValue": 0.2
+            },
+            {
+              "name": "pitch",
+              "ioValue": 2
+            },
+            {
+              "name": "starts",
+              "ioValue": 4
+            },
+            {
+              "name": "threadDepth",
+              "ioValue": 1.25
+            },
+            {
+              "name": "leftHand",
+              "ioValue": false
+            }
+          ],
+          "interpreterVersion": 1,
+          "code": "/**\n * TR8 thread for cutting a nut: 8 mm trapezoidal, 2 mm pitch, multi-start.\n * The lobed cross-section (crest, flank, root, flank per start) is\n * extruded with one full twist per lead, giving a true helicoid as a\n * single solid. clearance enlarges the profile radially for printing.\n * A left-hand thread is the right-hand one mirrored.\n */\nfunction run(\n  length: number = 64, // mm\n  majorDiameter: number = 8, // mm\n  clearance: number = 0.2, // mm, added to the radius\n  pitch: number = 2, // mm\n  starts: number = 4,\n  threadDepth: number = 1.25, // mm\n  leftHand: boolean = false,\n): Assembly {\n  const lead = pitch * starts;\n  const rMajor = majorDiameter / 2 + clearance;\n  const rMinor = rMajor - threadDepth;\n\n  const crest = 0.366 * pitch;\n  const flank = threadDepth * Math.tan((15 * Math.PI) / 180);\n  const root = pitch - crest - 2 * flank;\n\n  const toAngle = (z: number) => (2 * Math.PI * z) / lead;\n  const polar = (r: number, a: number): [number, number] => [r * Math.cos(a), r * Math.sin(a)];\n\n  let a = 0;\n  let pen = replicad.draw(polar(rMajor, a));\n  for (let i = 0; i < starts; i++) {\n    const segment = (r0: number, r1: number, width: number) => {\n      const end = a + toAngle(width);\n      pen = pen.threePointsArcTo(polar(r1, end), polar((r0 + r1) / 2, (a + end) / 2));\n      a = end;\n    };\n    segment(rMajor, rMajor, crest);\n    segment(rMajor, rMinor, flank);\n    segment(rMinor, rMinor, root);\n    if (i < starts - 1) segment(rMinor, rMajor, flank);\n  }\n  const end = 2 * Math.PI;\n  pen = pen.threePointsArcTo(polar(rMajor, end), polar((rMinor + rMajor) / 2, (a + end) / 2));\n\n  let screw = pen\n    .close()\n    .sketchOnPlane(\"XY\")\n    .extrude(length, { twistAngle: (360 * length) / lead });\n  if (leftHand) screw = screw.mirror(\"YZ\");\n\n  return new Assembly({ geometry: screw, color: \"#B8BCC2\", tags: [\"thread cutter\"] });\n}\n",
+          "compiledCode": "\"use strict\";\n/**\n * TR8 thread for cutting a nut: 8 mm trapezoidal, 2 mm pitch, multi-start.\n * The lobed cross-section (crest, flank, root, flank per start) is\n * extruded with one full twist per lead, giving a true helicoid as a\n * single solid. clearance enlarges the profile radially for printing.\n * A left-hand thread is the right-hand one mirrored.\n */\nfunction run(length = 64, // mm\nmajorDiameter = 8, // mm\nclearance = 0.2, // mm, added to the radius\npitch = 2, // mm\nstarts = 4, threadDepth = 1.25, // mm\nleftHand = false) {\n    const lead = pitch * starts;\n    const rMajor = majorDiameter / 2 + clearance;\n    const rMinor = rMajor - threadDepth;\n    const crest = 0.366 * pitch;\n    const flank = threadDepth * Math.tan((15 * Math.PI) / 180);\n    const root = pitch - crest - 2 * flank;\n    const toAngle = (z) => (2 * Math.PI * z) / lead;\n    const polar = (r, a) => [r * Math.cos(a), r * Math.sin(a)];\n    let a = 0;\n    let pen = replicad.draw(polar(rMajor, a));\n    for (let i = 0; i < starts; i++) {\n        const segment = (r0, r1, width) => {\n            const end = a + toAngle(width);\n            pen = pen.threePointsArcTo(polar(r1, end), polar((r0 + r1) / 2, (a + end) / 2));\n            a = end;\n        };\n        segment(rMajor, rMajor, crest);\n        segment(rMajor, rMinor, flank);\n        segment(rMinor, rMinor, root);\n        if (i < starts - 1)\n            segment(rMinor, rMajor, flank);\n    }\n    const end = 2 * Math.PI;\n    pen = pen.threePointsArcTo(polar(rMajor, end), polar((rMinor + rMajor) / 2, (a + end) / 2));\n    let screw = pen\n        .close()\n        .sketchOnPlane(\"XY\")\n        .extrude(length, { twistAngle: (360 * length) / lead });\n    if (leftHand)\n        screw = screw.mirror(\"YZ\");\n    return new Assembly({ geometry: screw, color: \"#B8BCC2\", tags: [\"thread cutter\"] });\n}\n"
+        },
+        {
+          "atomType": "Move",
+          "x": 0.5,
+          "y": 0.2,
+          "uniqueID": "id-310",
+          "ioValues": [
+            {
+              "name": "geometry",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "xDist",
+              "ioValue": 0
+            },
+            {
+              "name": "yDist",
+              "ioValue": 0
+            },
+            {
+              "name": "zDist",
+              "ioValue": -2
+            }
+          ]
+        },
+        {
+          "atomType": "Difference",
+          "x": 0.58,
+          "y": 0.32,
+          "uniqueID": "id-316",
+          "ioValues": [
+            {
+              "name": "retain",
+              "ioValue": "__GEOMETRY_INPUT__"
+            },
+            {
+              "name": "remove",
+              "ioValue": "__GEOMETRY_INPUT__"
+            }
+          ]
+        }
+      ],
+      "allConnectors": [
+        {
+          "ap2Name": "height",
+          "ap1ID": "id-277",
+          "ap2ID": "id-286"
+        },
+        {
+          "ap2Name": "x",
+          "ap1ID": "id-277",
+          "ap2ID": "id-290"
+        },
+        {
+          "ap2Name": "diameter",
+          "ap1ID": "id-280",
+          "ap2ID": "id-283"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-283",
+          "ap2ID": "id-286"
+        },
+        {
+          "ap2Name": "retain",
+          "ap1ID": "id-286",
+          "ap2ID": "id-316"
+        },
+        {
+          "ap2Name": "length",
+          "ap1ID": "id-290",
+          "ap2ID": "id-294"
+        },
+        {
+          "ap2Name": "geometry",
+          "ap1ID": "id-294",
+          "ap2ID": "id-310"
+        },
+        {
+          "ap2Name": "remove",
+          "ap1ID": "id-310",
+          "ap2ID": "id-316"
+        },
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-316",
+          "ap2ID": "id-275"
+        }
+      ],
+      "fileTypeVersion": 1
     }
   ],
   "allConnectors": [
