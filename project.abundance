@@ -8,8 +8,8 @@
   "allAtoms": [
     {
       "atomType": "Molecule",
-      "x": 0.2553,
-      "y": 0.5099,
+      "x": 0.2354,
+      "y": 0.5972,
       "uniqueID": "id-10",
       "name": "Shaft",
       "topLevel": false,
@@ -1287,6 +1287,40 @@
           "ioValue": "__GEOMETRY_INPUT__"
         }
       ]
+    },
+    {
+      "atomType": "Export",
+      "x": 0.3366,
+      "y": 0.8423,
+      "uniqueID": "id-386",
+      "ioValues": [
+        {
+          "name": "geometry",
+          "ioValue": "__GEOMETRY_INPUT__"
+        },
+        {
+          "name": "File Type",
+          "ioValue": "STEP",
+          "currentEquation": "STEP"
+        },
+        {
+          "name": "Resolution (dpi)",
+          "ioValue": 96
+        },
+        {
+          "name": "STL Tolerance",
+          "ioValue": 0.05
+        },
+        {
+          "name": "Part Name",
+          "ioValue": "Core",
+          "currentEquation": "Core"
+        }
+      ],
+      "type": null,
+      "resolution": 96,
+      "importIndex": 0,
+      "partName": "Core"
     }
   ],
   "allConnectors": [
@@ -1294,6 +1328,11 @@
       "ap2Name": "Shape 1",
       "ap1ID": "id-10",
       "ap2ID": "id-379"
+    },
+    {
+      "ap2Name": "geometry",
+      "ap1ID": "id-10",
+      "ap2ID": "id-386"
     },
     {
       "ap2Name": "geometry",
