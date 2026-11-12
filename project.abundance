@@ -28,8 +28,8 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.2685,
-          "y": 0.4676,
+          "x": 0.2956,
+          "y": 0.5296,
           "uniqueID": "id-14",
           "name": "4-Start Leadscrews (TR8x8)",
           "ioValues": [
@@ -412,7 +412,13 @@
           "fileTypeVersion": 1
         }
       ],
-      "allConnectors": [],
+      "allConnectors": [
+        {
+          "ap2Name": "number or geometry",
+          "ap1ID": "id-14",
+          "ap2ID": "id-12"
+        }
+      ],
       "fileTypeVersion": 1
     },
     {
@@ -426,24 +432,12 @@
           "ioValue": "__GEOMETRY_INPUT__"
         }
       ]
-    },
-    {
-      "atomType": "Circle",
-      "x": 0.707,
-      "y": 0.5296,
-      "uniqueID": "id-4",
-      "ioValues": [
-        {
-          "name": "diameter",
-          "ioValue": 10
-        }
-      ]
     }
   ],
   "allConnectors": [
     {
       "ap2Name": "number or geometry",
-      "ap1ID": "id-4",
+      "ap1ID": "id-10",
       "ap2ID": "id-2"
     }
   ],
