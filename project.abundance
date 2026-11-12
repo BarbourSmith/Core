@@ -28,8 +28,8 @@
         },
         {
           "atomType": "Molecule",
-          "x": 0.1958,
-          "y": 0.4789,
+          "x": 0.2685,
+          "y": 0.4676,
           "uniqueID": "id-14",
           "name": "4-Start Leadscrews (TR8x8)",
           "ioValues": [
@@ -40,6 +40,22 @@
           ],
           "topLevel": false,
           "allAtoms": [
+            {
+              "atomType": "Intersection",
+              "x": 0.7434,
+              "y": 0.4479,
+              "uniqueID": "id-103",
+              "ioValues": [
+                {
+                  "name": "geometry1",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                },
+                {
+                  "name": "geometry2",
+                  "ioValue": "__GEOMETRY_INPUT__"
+                }
+              ]
+            },
             {
               "atomType": "Output",
               "x": 1,
@@ -324,54 +340,6 @@
               "fileTypeVersion": 1
             },
             {
-              "atomType": "Move",
-              "x": 0.6,
-              "y": 0.7,
-              "uniqueID": "id-27",
-              "ioValues": [
-                {
-                  "name": "geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "xDist",
-                  "ioValue": 20
-                },
-                {
-                  "name": "yDist",
-                  "ioValue": 0
-                },
-                {
-                  "name": "zDist",
-                  "ioValue": 0
-                }
-              ]
-            },
-            {
-              "atomType": "Assembly",
-              "x": 0.8,
-              "y": 0.5,
-              "uniqueID": "id-28",
-              "ioValues": [
-                {
-                  "name": "makeDisjoint",
-                  "ioValue": false
-                },
-                {
-                  "name": "Shape 1",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "Shape2",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                },
-                {
-                  "name": "Shape3",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ]
-            },
-            {
               "atomType": "Tag",
               "x": 0.6,
               "y": 0.3,
@@ -402,25 +370,14 @@
               "tags": [
                 "Left Hand Thread"
               ]
-            },
-            {
-              "atomType": "Tag",
-              "x": 0.9,
-              "y": 0.5,
-              "uniqueID": "id-31",
-              "name": "4-Start",
-              "ioValues": [
-                {
-                  "name": "geometry",
-                  "ioValue": "__GEOMETRY_INPUT__"
-                }
-              ],
-              "tags": [
-                "4-Start"
-              ]
             }
           ],
           "allConnectors": [
+            {
+              "ap2Name": "number or geometry",
+              "ap1ID": "id-103",
+              "ap2ID": "id-15"
+            },
             {
               "ap2Name": "Length",
               "ap1ID": "id-16",
@@ -442,29 +399,14 @@
               "ap2ID": "id-30"
             },
             {
-              "ap2Name": "Shape2",
-              "ap1ID": "id-27",
-              "ap2ID": "id-28"
-            },
-            {
-              "ap2Name": "geometry",
-              "ap1ID": "id-28",
-              "ap2ID": "id-31"
-            },
-            {
-              "ap2Name": "Shape 1",
+              "ap2Name": "geometry1",
               "ap1ID": "id-29",
-              "ap2ID": "id-28"
+              "ap2ID": "id-103"
             },
             {
-              "ap2Name": "geometry",
+              "ap2Name": "geometry2",
               "ap1ID": "id-30",
-              "ap2ID": "id-27"
-            },
-            {
-              "ap2Name": "number or geometry",
-              "ap1ID": "id-31",
-              "ap2ID": "id-15"
+              "ap2ID": "id-103"
             }
           ],
           "fileTypeVersion": 1
