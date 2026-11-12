@@ -8,8 +8,8 @@
   "allAtoms": [
     {
       "atomType": "Molecule",
-      "x": 0.2619,
-      "y": 0.5465,
+      "x": 0.2553,
+      "y": 0.5099,
       "uniqueID": "id-10",
       "name": "Shaft",
       "topLevel": false,
@@ -79,8 +79,8 @@
             },
             {
               "atomType": "Molecule",
-              "x": 0.4,
-              "y": 0.3,
+              "x": 0.3995,
+              "y": 0.2845,
               "uniqueID": "id-17",
               "name": "TR8x8 Leadscrew",
               "ioValues": [
