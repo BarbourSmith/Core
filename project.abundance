@@ -8,8 +8,8 @@
   "allAtoms": [
     {
       "atomType": "Molecule",
-      "x": 0.2354,
-      "y": 0.5972,
+      "x": 0.0694,
+      "y": 0.8986,
       "uniqueID": "id-10",
       "name": "Shaft",
       "topLevel": false,
@@ -361,8 +361,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.3353,
-      "y": 0.32,
+      "x": 0.1951,
+      "y": 0.307,
       "uniqueID": "id-273",
       "name": "CW Nut (Right Hand)",
       "ioValues": [
@@ -581,8 +581,8 @@
     },
     {
       "atomType": "Molecule",
-      "x": 0.4153,
-      "y": 0.44,
+      "x": 0.086,
+      "y": 0.538,
       "uniqueID": "id-320",
       "name": "CCW Nut (Left Hand)",
       "ioValues": [
@@ -801,8 +801,8 @@
     },
     {
       "atomType": "Move",
-      "x": 0.4953,
-      "y": 0.56,
+      "x": 0.4563,
+      "y": 0.4507,
       "uniqueID": "id-367",
       "ioValues": [
         {
@@ -825,8 +825,8 @@
     },
     {
       "atomType": "Move",
-      "x": 0.5753,
-      "y": 0.68,
+      "x": 0.3909,
+      "y": 0.707,
       "uniqueID": "id-373",
       "ioValues": [
         {
@@ -849,8 +849,8 @@
     },
     {
       "atomType": "Assembly",
-      "x": 0.6553,
-      "y": 0.8,
+      "x": 0.5999,
+      "y": 0.8592,
       "uniqueID": "id-379",
       "ioValues": [
         {
@@ -877,8 +877,8 @@
     },
     {
       "atomType": "Export",
-      "x": 0.3366,
-      "y": 0.8423,
+      "x": 0.1594,
+      "y": 0.7211,
       "uniqueID": "id-386",
       "ioValues": [
         {
