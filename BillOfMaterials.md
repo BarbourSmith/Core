@@ -2,5 +2,4 @@
 # Bill Of Materials 
  |Part|Number Needed|Price|Source| 
  |----|----------|-----|-----|
-|TR8x8 leadscrew, 8 mm lead, 4-start, stainless steel|55|$0.00||
-|Total: |55|$0.00| |
+|Total: |0|$0.00| |
